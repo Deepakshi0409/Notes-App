@@ -8,9 +8,13 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 @Database(entities = {Notes.class}, version = 1, exportSchema = false)
 public abstract class NotesDatabase extends RoomDatabase {
     public abstract NotesDao notesDao();
+    public static ExecutorService executor= Executors.newSingleThreadExecutor();
 
     public static NotesDatabase INSTANCE = null;
 

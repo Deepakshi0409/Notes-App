@@ -21,7 +21,7 @@
        />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/content_name"
