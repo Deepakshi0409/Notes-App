@@ -44,4 +44,8 @@ public Notes(long id, String title, String content) {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public boolean isNotesEqual(Notes n2) {
+    return (title.equals(n2.getTitle())&&(content.equals(n2.getContent())));
+    }
 }
