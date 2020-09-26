@@ -1,4 +1,14 @@
 package com.example.notes;
 
-public class addviewModel {
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+
+public class addviewModel extends AndroidViewModel {
+    private NotesRepository notesRepository;
+    public addviewModel(@NonNull Application application) {
+        super(application);
+
+    }
 }
