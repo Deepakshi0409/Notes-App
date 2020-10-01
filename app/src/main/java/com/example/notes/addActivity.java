@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 public class addActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
 
-    public static final String EXTRA_DATA_NAME = "extra_notes_name";
+    public static final String EXTRA_DATA_TITLE = "extra_notes_title";
     public static final String EXTRA_DATA_CONTENT = "extra_notes_content";
     private addviewModel maddviewModel;
 
@@ -24,6 +24,11 @@ public class addActivity extends AppCompatActivity implements AdapterView.OnItem
 
         final Bundle extras = getIntent().getExtras();
         maddviewModel = new ViewModelProvider(this).get(addviewModel.class);
+
+        if (extras != null) {
+            String notesTitle = extras.getString(EXTRA_DATA_TITLE, "");
+            String notescontent = extras.getString(EXTRA_DATA_CONTENT, "");
+        }
     }
 
     @Override
