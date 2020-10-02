@@ -28,7 +28,16 @@ public class addActivity extends AppCompatActivity implements AdapterView.OnItem
         if (extras != null) {
             String notesTitle = extras.getString(EXTRA_DATA_TITLE, "");
             String notescontent = extras.getString(EXTRA_DATA_CONTENT, "");
+            if (!notesTitle.isEmpty()) {
+                titleET.setText(notesTitle);
+            }
+            if (!notescontent.isEmpty()){
+                contentET.setText(notescontent);
+                contentET.setSelection(notescontent.length());
+                contentET.requestFocus();
+            }
         }
+
     }
 
     @Override
