@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -19,8 +20,9 @@ public class addActivity extends AppCompatActivity implements AdapterView.OnItem
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_activity);
-        EditText titleET = findViewById(R.id.titleET);
-        EditText contentET = findViewById(R.id.contentET);
+        final EditText titleET = findViewById(R.id.titleET);
+        final EditText contentET = findViewById(R.id.contentET);
+        TextView save = findViewById(R.id.newbutton);
 
         final Bundle extras = getIntent().getExtras();
         maddviewModel = new ViewModelProvider(this).get(addviewModel.class);
@@ -36,7 +38,15 @@ public class addActivity extends AppCompatActivity implements AdapterView.OnItem
                 contentET.setSelection(notescontent.length());
                 contentET.requestFocus();
             }
+                save.setText("UPDATE");
         }
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String TITLE = titleET.getText().toString();
+                String CONTENT = contentET.getText().toString();
+            }
+        });
 
     }
 
