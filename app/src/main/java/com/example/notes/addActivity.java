@@ -3,8 +3,10 @@ package com.example.notes;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -22,7 +24,8 @@ public class addActivity extends AppCompatActivity implements AdapterView.OnItem
         setContentView(R.layout.add_activity);
         final EditText titleET = findViewById(R.id.titleET);
         final EditText contentET = findViewById(R.id.contentET);
-        TextView save = findViewById(R.id.newbutton);
+        Button save = findViewById(R.id.newbutton);
+
 
         final Bundle extras = getIntent().getExtras();
         maddviewModel = new ViewModelProvider(this).get(addviewModel.class);
@@ -45,6 +48,15 @@ public class addActivity extends AppCompatActivity implements AdapterView.OnItem
             public void onClick(View v) {
                 String TITLE = titleET.getText().toString();
                 String CONTENT = contentET.getText().toString();
+            if (!TITLE.isEmpty()&& !CONTENT.isEmpty()) {
+                Notes notes = new Notes(0L,TITLE,CONTENT);
+                maddviewModel.insertNotes(notes);
+            }
+            else {
+                Toast.makeText(addActivity.this,"Missed inputs",Toast.LENGTH_SHORT).show();
+            }
+            setResult(RESULT_OK);
+            finish();
             }
         });
 

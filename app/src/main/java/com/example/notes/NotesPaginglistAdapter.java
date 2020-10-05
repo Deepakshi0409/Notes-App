@@ -28,10 +28,13 @@ public class NotesPaginglistAdapter extends PagedListAdapter<Notes,listviewHolde
         holder.bind(currentNotes);
     }
     }
+    public Notes getNotesAtPosition(int position){
+        return getItem(position);
+    }
     private static DiffUtil.ItemCallback<Notes> DIFF_CALLBACK = new DiffUtil.ItemCallback<Notes>() {
         @Override
         public boolean areItemsTheSame(@NonNull Notes oldItem, @NonNull Notes newItem) {
-            return oldItem.getTitle()== newItem.getTitle();
+            return oldItem.getTitle().equals(newItem.getTitle());
         }
 
         @Override
