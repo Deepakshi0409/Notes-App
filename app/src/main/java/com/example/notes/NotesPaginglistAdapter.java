@@ -9,8 +9,10 @@ import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 
 public class NotesPaginglistAdapter extends PagedListAdapter<Notes,listviewHolder> {
+    private ClickListener clickListener;
     protected NotesPaginglistAdapter() {
         super(DIFF_CALLBACK);
+
     }
 
     @NonNull
@@ -22,14 +24,30 @@ public class NotesPaginglistAdapter extends PagedListAdapter<Notes,listviewHolde
     }
 
     @Override
-    public void onBindViewHolder(@NonNull listviewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final listviewHolder holder, final int position) {
     Notes currentNotes = getItem(position);
     if (currentNotes!=null) {
-        holder.bind(currentNotes);
+        if (clickListener!=null) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    clickListener.itemClick(position,v);
+                }
+            });
+        }
+
     }
     }
     public Notes getNotesAtPosition(int position){
         return getItem(position);
+    }
+
+    public void onItemClickListener(ClickListener clickListener){
+        this.clickListener = clickListener;
+    }
+
+    public interface ClickListener{
+        void itemClick(int position,View view);
     }
     private static DiffUtil.ItemCallback<Notes> DIFF_CALLBACK = new DiffUtil.ItemCallback<Notes>() {
         @Override

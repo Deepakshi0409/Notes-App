@@ -19,6 +19,11 @@ import com.google.android.material.snackbar.Snackbar;
 public class MainActivity extends AppCompatActivity {
     private listviewModel viewModel;
     private Notes notes;
+    private static final int NEW_DATA_REQUEST_CODE = 1;
+    private static final int UPDATE_DATA_REQUEST_CODE = 2;
+    private static final String EXTRA_DATA_ID = "extra_notes_id";
+    private static final String EXTRA_DATA_TITLE = "extra_notes_title";
+    private static final String EXTRA_DATA_CONTENT = "extra_notes_content";
 
 
     @Override
@@ -30,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,addActivity.class);
-                startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, addActivity.class);
+                startActivityForResult(intent, NEW_DATA_REQUEST_CODE);
             }
         });
         viewModel = new ViewModelProvider(this).get(listviewModel.class);
@@ -41,13 +46,13 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(notesPaginglistAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         ConstraintLayout constraintLayout = findViewById(R.id.constraintLayout);
-        final Snackbar snackbar = Snackbar.make(constraintLayout,"Task Deleted ", BaseTransientBottomBar.LENGTH_LONG).setAction("Undo", new View.OnClickListener() {
+        final Snackbar snackbar = Snackbar.make(constraintLayout, "Task Deleted ", BaseTransientBottomBar.LENGTH_LONG).setAction("Undo", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 viewModel.insertNotes(notes);
             }
         });
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT| ItemTouchHelper.RIGHT) {
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
@@ -56,11 +61,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int pos = viewHolder.getAdapterPosition();
-                    notes = notesPaginglistAdapter.getNotesAtPosition(pos);
-                    viewModel.deleteNotes(notes);
-                    snackbar.show();
+                notes = notesPaginglistAdapter.getNotesAtPosition(pos);
+                viewModel.deleteNotes(notes);
+                snackbar.show();
             }
         });
         itemTouchHelper.attachToRecyclerView(recyclerView);
-    }
+
+
+}
 }
