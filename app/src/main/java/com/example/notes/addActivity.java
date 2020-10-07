@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 public class addActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-
+    private static final String EXTRA_DATA_ID = "extra_notes_id";
     public static final String EXTRA_DATA_TITLE = "extra_notes_title";
     public static final String EXTRA_DATA_CONTENT = "extra_notes_content";
     private addviewModel maddviewModel;

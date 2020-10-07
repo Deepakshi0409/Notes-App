@@ -41,9 +41,9 @@ public class MainActivity extends AppCompatActivity {
         });
         viewModel = new ViewModelProvider(this).get(listviewModel.class);
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        final NotesPaginglistAdapter notesPaginglistAdapter = new NotesPaginglistAdapter();
+        final NotesPaginglistAdapter noteslistPagingAdapter = new NotesPaginglistAdapter();
 
-        recyclerView.setAdapter(notesPaginglistAdapter);
+        recyclerView.setAdapter(noteslistPagingAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         ConstraintLayout constraintLayout = findViewById(R.id.constraintLayout);
         final Snackbar snackbar = Snackbar.make(constraintLayout, "Task Deleted ", BaseTransientBottomBar.LENGTH_LONG).setAction("Undo", new View.OnClickListener() {
@@ -61,13 +61,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int pos = viewHolder.getAdapterPosition();
-                notes = notesPaginglistAdapter.getNotesAtPosition(pos);
+                notes = noteslistPagingAdapter.getNotesAtPosition(pos);
                 viewModel.deleteNotes(notes);
                 snackbar.show();
             }
         });
         itemTouchHelper.attachToRecyclerView(recyclerView);
+        noteslistPagingAdapter.onItemClickListener(new NotesPaginglistAdapter.ClickListener() {
+            @Override
+            public void itemClick(int position, View view) {
+                Notes currentNotes = noteslistPagingAdapter.getNotesAtPosition(position);
+            }
+        });
 
 
 }
+        private void launchUpdateNotes(Notes notes) {
+        Intent intent = new Intent(MainActivity.this,addActivity.class);
+        intent.putExtra(EXTRA_DATA_ID,notes.getId());
+        intent.putExtra(EXTRA_DATA_TITLE,notes.getTitle());
+        intent.putExtra(EXTRA_DATA_CONTENT,notes.getContent());
+        startActivityForResult(intent,NEW_DATA_REQUEST_CODE);
+        }
 }
