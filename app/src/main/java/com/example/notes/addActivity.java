@@ -49,8 +49,17 @@ public class addActivity extends AppCompatActivity implements AdapterView.OnItem
                 String TITLE = titleET.getText().toString();
                 String CONTENT = contentET.getText().toString();
             if (!TITLE.isEmpty()&& !CONTENT.isEmpty()) {
-                Notes notes = new Notes(0L,TITLE,CONTENT);
-                maddviewModel.insertNotes(notes);
+                if(extras!=null){
+                    long id = extras.getLong(EXTRA_DATA_ID);
+                    Notes notes = new Notes (id,TITLE,CONTENT);
+                    maddviewModel.updateNotes(notes);
+                }
+                else {
+
+                    Notes notes = new Notes(0L,TITLE,CONTENT);
+                    maddviewModel.insertNotes(notes);
+                }
+
             }
             else {
                 Toast.makeText(addActivity.this,"Missed inputs",Toast.LENGTH_SHORT).show();
