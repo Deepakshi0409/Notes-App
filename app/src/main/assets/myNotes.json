@@ -1,0 +1,13 @@
+{
+"notes" : [
+  {
+    "title" : "UI for the app",
+    "content" : "Create the views and UI for the app"
+  },
+  {
+    "title" : "Local database",
+    "content" : "Setup the room database to store data locality"
+  }
+
+]
+}
