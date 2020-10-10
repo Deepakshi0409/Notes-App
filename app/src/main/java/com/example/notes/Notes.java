@@ -2,6 +2,7 @@ package com.example.notes;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "notes")
@@ -19,6 +20,12 @@ public Notes(long id, String title, String content) {
    this.id=id;
    this.title = title;
    this.content=content;
+    }
+
+    @Ignore
+    public Notes(String title, String content){
+    this.title = title;
+    this.content = content;
     }
 
     public long getId() {
