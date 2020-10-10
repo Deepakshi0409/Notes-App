@@ -42,7 +42,7 @@ public class NotesPaginglistAdapter extends PagedListAdapter<Notes,listviewHolde
         return getItem(position);
     }
 
-    public void onItemClickListener(ClickListener clickListener){
+    public void setonItemClickListener(ClickListener clickListener){
         this.clickListener = clickListener;
     }
 

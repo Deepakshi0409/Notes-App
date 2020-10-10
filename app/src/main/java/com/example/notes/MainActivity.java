@@ -67,10 +67,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         itemTouchHelper.attachToRecyclerView(recyclerView);
-        noteslistPagingAdapter.onItemClickListener(new NotesPaginglistAdapter.ClickListener() {
+        noteslistPagingAdapter.setonItemClickListener(new NotesPaginglistAdapter.ClickListener() {
             @Override
             public void itemClick(int position, View view) {
                 Notes currentNotes = noteslistPagingAdapter.getNotesAtPosition(position);
+                launchUpdateNotes(currentNotes);
             }
         });
 
@@ -81,6 +82,6 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_DATA_ID,notes.getId());
         intent.putExtra(EXTRA_DATA_TITLE,notes.getTitle());
         intent.putExtra(EXTRA_DATA_CONTENT,notes.getContent());
-        startActivityForResult(intent,NEW_DATA_REQUEST_CODE);
+        startActivityForResult(intent,UPDATE_DATA_REQUEST_CODE);
         }
 }
