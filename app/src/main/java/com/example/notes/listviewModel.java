@@ -12,12 +12,10 @@ public class listviewModel extends AndroidViewModel {
     private LiveData<PagedList<Notes>> data;
     public listviewModel(@NonNull Application application) {
         super(application);
-        notesRepository= new NotesRepository(application);
+        notesRepository= NotesRepository.getNotesRepository(application);
         data =notesRepository.getAllNotes();
     }
-        public void insertNotes(Notes notes) {
-        notesRepository.insertNotes(notes);
-        }
+
         public void deleteNotes(Notes notes) {
         notesRepository.deleteNotes(notes);
         }

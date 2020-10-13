@@ -14,7 +14,7 @@ public class NotesRepository {
     private NotesDao notesDao;
     private static NotesRepository notesRepository = null;
     private static int PAGE_SIZE = 15;
-    public static ExecutorService executor= Executors.newSingleThreadExecutor();
+     ExecutorService executor= Executors.newSingleThreadExecutor();
 
     public NotesRepository(Application application) {
         NotesDatabase db = NotesDatabase.getINSTANCE(application);
