@@ -53,6 +53,6 @@ public Notes(long id, String title, String content) {
     }
 
     public boolean isNotesEqual(Notes n2) {
-    return (title.equals(n2.getTitle())&&(content.equals(n2.getContent())));
+    return (id==n2.getId()&&title.equals(n2.getTitle())&&(content.equals(n2.getContent())));
     }
 }
