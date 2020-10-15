@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 public class addActivity extends AppCompatActivity {
 
-    private static final String EXTRA_DATA_ID = "extra_notes_id";
+    public static final String EXTRA_DATA_ID = "extra_notes_id";
     public static final String EXTRA_DATA_TITLE = "extra_notes_title";
     public static final String EXTRA_DATA_CONTENT = "extra_notes_content";
     private addviewModel maddviewModel;
@@ -33,13 +33,12 @@ public class addActivity extends AppCompatActivity {
         if (extras != null) {
             String notesTitle = extras.getString(EXTRA_DATA_TITLE, "");
             String notescontent = extras.getString(EXTRA_DATA_CONTENT, "");
+            Long notesid = extras.getLong(EXTRA_DATA_ID,0L);
             if (!notesTitle.isEmpty()) {
                 titleET.setText(notesTitle);
             }
             if (!notescontent.isEmpty()){
                 contentET.setText(notescontent);
-                contentET.setSelection(notescontent.length());
-                contentET.requestFocus();
             }
                 save.setText("UPDATE");
         }
@@ -49,7 +48,7 @@ public class addActivity extends AppCompatActivity {
                 String TITLE = titleET.getText().toString();
                 String CONTENT = contentET.getText().toString();
             if (!TITLE.isEmpty()&& !CONTENT.isEmpty()) {
-                if(extras!=null){
+                if(extras!=null&& extras.containsKey(EXTRA_DATA_ID)){
                     long id = extras.getLong(EXTRA_DATA_ID);
                     Notes notes = new Notes ( id,TITLE,CONTENT);
                     maddviewModel.updateNotes(notes);
